@@ -64,6 +64,9 @@ function isinstalled {
 # Kernel sources !
 # For CentOS 8 srpms seem slow to be uploaded... But sources (i.e linux tarball, kabi stuff) looks the same as RHEL8's, so reused those.
 # Linaro HPC SIG has a SRPM of the latest kernel on the hpc-fileserver
+# Kernel spec deps:
+# sudo yum install --enablerepo="PowerTools" -y audit-libs-devel binutils-devel elfutils-devel java-devel kabi-dw ncurses-devel newt-devel numactl-devel openssl-devel pciutils-devel perl-devel python3-devel python3-docutils xmlto xz-devel zlib-devel perl-ExtUtils-Embed
+# pdsh deps : readline-devel
 
 sudo yum config-manager --set-enabled PowerTools
 sudo yum -y install "@Development Tools"
