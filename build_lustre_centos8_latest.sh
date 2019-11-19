@@ -87,9 +87,6 @@ sudo yum -y install --enablerepo="PowerTools" python3 python3-devel python3-setu
 #sudo yum -y update
 #sudo yum -y install Lmod
 
-# CentOS 8 cannot cope with ; 
-#BuildRequires: %kernel_module_package_buildreqs
-sed -i 's/BuildRequires: %kernel_module_package_buildreqs/#BuildRequires: %kernel_module_package_buildreqs/g' $DIR_ZFS_SRC/rpm/redhat/zfs-kmod.spec.in
 
 # Couldn't find doc on how to do build-ids...
 sudo sed -i 's/%{?_missing_build_ids_terminate_build:--strict-build-id}//g' /usr/lib/rpm/macros
@@ -120,6 +117,9 @@ fi
 if isinstalled 'zfs'; then
 	echo "ZFS INSTALLED : SKIPPING BUILD"
 else
+	# CentOS 8 cannot cope with ; 
+	#BuildRequires: %kernel_module_package_buildreqs
+	sed -i 's/BuildRequires: %kernel_module_package_buildreqs/##BadBuildRequires: %kernel_module_package_buildreqs/g' $DIR_ZFS_SRC/rpm/redhat/zfs-kmod.spec.in
 	# If you have a "debug kernel", it won't accept CDDL
 	sudo sed -i 's/CDDL/GPL/g' $DIR_ZFS_SRC/META
 
@@ -140,7 +140,7 @@ fi
 
 
 
-if isinstalled 'e2fsprogs'; then
+if ! isinstalled 'e2fsprogs'; then
 	echo "E2FSPROGS INSTALLED : SKIPPING BUILD"
 else
 	# Build e2fsprogs
@@ -170,8 +170,12 @@ fi
 # for file in $DIR_E2PROGS/*.deb; do sudo gdebi -q --non-interactive $file; done
 
 # Get Lustre source
-#git clone -b $LUSTRE_BRANCH git://git.whamcloud.com/fs/lustre-release.git $DIR_LUSTRE_SRC || true
+git clone git://git.whamcloud.com/fs/lustre-release.git $DIR_LUSTRE_SRC || true
 #git --git-dir $DIR_LUSTRE_SRC reset --hard && git --git-dir $DIR_LUSTRE_SRC clean -dfx || true
+
+# CentOS 8 cannot cope with ; 
+#BuildRequires: %kernel_module_package_buildreqs
+sed -i 's/BuildRequires: %kernel_module_package_buildreqs/##BadBuildRequires: %kernel_module_package_buildreqs/g' $DIR_LUSTRE_SRC/lustre.spec.in
 
 # Build Lustre-client
 if isinstalled 'lustre-client-tests'; then
@@ -182,14 +186,8 @@ else
 		&& $DIR_LUSTRE_SRC/configure --disable-server \
 		&& l_make $DIR_LUSTRE_SRC rpms -j $NPROC
 fi
-#git --git-dir $DIR_LUSTRE_SRC reset --hard && git --git-dir $DIR_LUSTRE_SRC clean -dfx || true
 
 # Build Lustre-server with ZFS and LDISKFS Support
-
-# CentOS 8 cannot cope with ; 
-#BuildRequires: %kernel_module_package_buildreqs
-sed -i 's/BuildRequires: %kernel_module_package_buildreqs/#BuildRequires: %kernel_module_package_buildreqs/g' $DIR_LUSTRE_SRC/lustre.spec.in
-
 cd $DIR_LUSTRE_SRC
 sh "$DIR_LUSTRE_SRC/autogen.sh" \
 	&& $DIR_LUSTRE_SRC/configure --enable-server --enable-modules \
