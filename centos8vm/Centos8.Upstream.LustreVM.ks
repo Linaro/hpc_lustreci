@@ -86,7 +86,8 @@ sed -i "s/enforcing/disabled/g" /etc/selinux/config
 groupadd -g 500 runas
 useradd -g 500 -m -u 500 runas
 
-### LUSTRE : Create builder user
+### LUSTRE : Create builder user and passwordless sudo
+sed -i "s/%wheel[[:space:]]\+ALL=(ALL)[[:space:]]\+ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g" /etc/sudoers
 useradd -m builder
 usermod -a -G wheel builder
 
