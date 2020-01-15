@@ -7,7 +7,7 @@ shopt -s expand_aliases
 #### LOCAL BUILD ENV
 ### TX2 BUILD
 NPROC=12
-USER=bgerdeb
+USER="$(whoami)"
 ROOT="/home/$USER"
 DIR_HOME="$ROOT/lustre_build"
 alias l_make="$MAKE_ENV make -C"  
@@ -32,7 +32,7 @@ SPL_URL="https://github.com/zfsonlinux/zfs/releases/download/zfs-$ZFS_VERSION/sp
 DIR_E2PROGS="$DIR_HOME/e2fsprogs"
 DIR_E2PROGS_SRC="$DIR_E2PROGS/e2fsprogs"
 E2FSPROGS_PACKAGING_URL="http://archive.ubuntu.com/ubuntu/pool/main/e/e2fsprogs/e2fsprogs_1.44.6-1.debian.tar.xz"
-DIR_RPMBUILD="/home/bgerdeb/rpmbuild/RPMS/aarch64/"
+DIR_RPMBUILD="/home/$USER/rpmbuild/RPMS/aarch64/"
 
 #### LUSTRE BUILD ENV
 DIR_LUSTRE="$DIR_HOME/lustre"
@@ -41,7 +41,7 @@ LUSTRE_BRANCH="lustre-arm"
 
 
 #### BUILD
-DIR_KERNEL="/home/bgerdeb/rpmbuild/BUILD/kernel-4.18.0-80.11.2.el8_0/linux-4.18.0-80.11.2.el8.aarch64/"
+DIR_KERNEL="/home/$USER/rpmbuild/BUILD/kernel-4.18.0-80.11.2.el8_0/linux-4.18.0-80.11.2.el8.aarch64/"
 
 mkdir -p $DIR_HOME
 mkdir -p $DIR_REPO
@@ -65,8 +65,19 @@ function isinstalled {
 # For CentOS 8 srpms seem slow to be uploaded... But sources (i.e linux tarball, kabi stuff) looks the same as RHEL8's, so reused those.
 # Linaro HPC SIG has a SRPM of the latest kernel on the hpc-fileserver
 # Kernel spec deps:
-# sudo yum install --enablerepo="PowerTools" -y audit-libs-devel binutils-devel elfutils-devel java-devel kabi-dw ncurses-devel newt-devel numactl-devel openssl-devel pciutils-devel perl-devel python3-devel python3-docutils xmlto xz-devel zlib-devel perl-ExtUtils-Embed
+# sudo yum install --enablerepo="PowerTools" -y audit-libs-devel binutils-devel elfutils-devel java-devel kabi-dw ncurses-devel newt-devel numactl-devel openssl-devel pciutils-devel perl-devel python3-devel python3-docutils xmlto xz-devel zlib-devel perl-ExtUtils-Embed bc net-tools
 # pdsh deps : readline-devel
+
+cat << EOF > "$DIR_HOME/lustre.repo"
+[lustre_repo]
+name=Lustre repo
+baseurl=file://$DIR_REPO
+enabled=1
+gpgcheck=0
+EOF
+
+sudo mv "$DIR_HOME/lustre.repo" "/etc/yum.repos.d/"
+sudo yum update -y
 
 sudo yum config-manager --set-enabled PowerTools
 sudo yum -y install "@Development Tools"
