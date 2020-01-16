@@ -66,15 +66,37 @@ done
 mkdir -m0700 /root/.ssh/
 yum update -y
 
-{% for key in ssh_keys %}
+{% for name, key in users.items() %}{% if "lustreclusterprivate" not in name|string %}
 printf "{{key}}\n" >> /root/.ssh/authorized_keys ;
-{% endfor %}
+{% endif %}{% endfor %}
 
 ### Display IP on login
 echo "My IP address: \4" > /etc/issue
 
 ### set permissions
 chmod 0600 /root/.ssh/authorized_keys
+
+### LUSTRE : Install cluster private key
+{% for name, key in users.items() %}{% if "lustreclusterprivate" in name|string %}
+printf "{{key}}\n" >> /root/.ssh/lustrecluster ;
+{% endif %}{% endfor %}
+chmod 0600 /root/.ssh/lustrecluster
+
+### LUSTRE : Install compatible kernel
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-core-4.18.0-80.11.2.el8.aarch64.rpm 
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-cross-headers-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-devel-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-headers-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-modules-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-modules-extra-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-tools-libs-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/kernel-tools-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/perf-4.18.0-80.11.2.el8.aarch64.rpm 
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/python3-perf-4.18.0-80.11.2.el8.aarch64.rpm
+rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/bpftool-4.18.0-80.11.2.el8.aarch64.rpm
+# And exclude kernel from upgrades
+echo "exclude=kernel*" >> /etc/yum.conf
 
 ### LUSTRE : Install dependencies for build
 yum install --enablerepo="PowerTools" -y audit-libs-devel binutils-devel elfutils-devel java-devel kabi-dw ncurses-devel newt-devel numactl-devel openssl-devel pciutils-devel perl-devel python3-devel python3-docutils xmlto xz-devel zlib-devel perl-ExtUtils-Embed readline-devel bc net-tools
