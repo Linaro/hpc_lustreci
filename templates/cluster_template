@@ -1,0 +1,15 @@
+# This file is used to specify the Lustre Cluster environment
+# That is : what is the hostname of each node, as well as its IP.
+# It is used to substitute template the config file for the lustre test suite
+# As well as the current node's hosts file
+#
+# Format is as follows (copy paste, comment out since it will be source'd) :
+# NOTE : DEVs, for escaping purposes, in the config are in the form of OSTDEV=/dev/$DEVOST
+#export MDSMGSMACHINEIP="IP_OF_MDSMGS_HERE"
+#export MDSMGSMACHINE="HOSTNAME_OF_MDSMGS_HERE"
+#export OSTMACHINEIP="IP_OF_THE_OST_HERE"
+#export OSTMACHINE="HOSTNAME_OF_THE_OST_HERE"
+#export CLIENTMACHINEIP="IP_OF_CLIENT_HERE"
+#export CLIENTMACHINE="HOSTNAME_OF_CLIENT_HERE"
+#export DEVOST="partition_dedicated_to_OST"
+#export DEVMDSMGS="partition_dedicated_to_MDSMGS"

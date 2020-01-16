@@ -12,31 +12,31 @@ RUNAS='sudo -u runas'
 # MDS and MDT configuration
 MDSCOUNT=1
 
-mds_HOST="MDSMGS"
-mds_host="MDSMGS"
-mgs_HOST="MDSMGS"
-mgs_host="MDSMGS"
-MGSNID="MDSMGS"
-mdt_HOST="MDSMGS"
-mdt_host="MDSMGS"
-MDSDEV1="/dev/vdb1"
-MGSDEV="/dev/vdb1"
-MGSDEV1="/dev/vdb1"
+mds_HOST="MDSMGSMACHINE"
+mds_host="MDSMGSMACHINE"
+mgs_HOST="MDSMGSMACHINE"
+mgs_host="MDSMGSMACHINE"
+MGSNID="MDSMGSMACHINE"
+mdt_HOST="MDSMGSMACHINE"
+mdt_host="MDSMGSMACHINE"
+MDSDEV1="/dev/DEVMDSMGS"
+MGSDEV="/dev/DEVMDSMGS"
+MGSDEV1="/dev/DEVMDSMGS"
 
 # OSS and OST configuration
 OSTCOUNT=1
 
-ost_HOST="OST"
-OSTDEV1="/dev/vdb1"
-OSTDEV="/dev/vdb1"
-OST1DEV="/dev/vdb1"
-OSSDEV="/dev/vdb1"
-OSSDEV1="/dev/vdb1"
+ost_HOST="OSTMACHINE"
+OSTDEV1="/dev/DEVOST"
+OSTDEV="/dev/DEVOST"
+OST1DEV="/dev/DEVOST"
+OSSDEV="/dev/DEVOST"
+OSSDEV1="/dev/DEVOST"
 
 # Client configuration
 CLIENTCOUNT=1
-CLIENTS="client"
-RCLIENTS="client"
+CLIENTS="CLIENTMACHINE"
+RCLIENTS="CLIENTMACHINE"
 
 PDSH="/usr/bin/pdsh -l root -S -Rssh -w"
 
