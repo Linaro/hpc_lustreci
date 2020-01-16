@@ -93,6 +93,8 @@ sudo yum -y install xmlto asciidoc elfutils-libelf-devel zlib-devel binutils-dev
 
 
 sudo yum -y install --enablerepo="PowerTools" python3 python3-devel python3-setuptools python3-cffi libyaml-devel libyaml libtool
+sudo yum -y install epel-release
+sudo yum -y install dbench
 
 #sudo yum -y --exclude=kernel* install http://build.openhpc.community/OpenHPC:/1.3/CentOS_7/aarch64/ohpc-release-1.3-1.el7.aarch64.rpm || true 
 #sudo yum -y update
