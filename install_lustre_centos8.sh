@@ -12,6 +12,8 @@ LUSTRE_DISK="/dev/sdb"
 
 mkdir -p $DIR_BROKEN_KMODS
 
+sudo yum install -y epel-release
+sudo yum install -y dbench
 sudo yum install -y zfs kmod-zfs-devel
 
 wget -P "$DIR_BROKEN_KMODS" "$LUSTRE_REPO_URL/kmod-lustre-$LUSTRE_VERSION.el8.aarch64.rpm"
