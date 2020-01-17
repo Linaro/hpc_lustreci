@@ -120,6 +120,9 @@ There is still work to be done to fully automate the pipeline, most notably :
 - [ ] Automate recuperation of test suite results, eventual kdumps and error reports to some place
 - [ ] Automate booting back up of the VMs after they have been provisioned
 - [ ] Ansiblelize what makes sense to be transposed to Ansible
+- [ ] Add ZFS backend support for testing configuration 
+- [ ] Add InfiniBand link support for testing configuration (via VM's VFs) 
+- [ ] Add multiple OSS, MDS/MGS support in testing configuration
 
 Also, openSUSE support still needs to be added.
 
