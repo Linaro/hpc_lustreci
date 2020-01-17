@@ -123,6 +123,7 @@ There is still work to be done to fully automate the pipeline, most notably :
 - [ ] Add ZFS backend support for testing configuration 
 - [ ] Add InfiniBand link support for testing configuration (via VM's VFs) 
 - [ ] Add multiple OSS, MDS/MGS support in testing configuration
+- [ ] Add support for testing at scale
 
 Also, openSUSE support still needs to be added.
 
