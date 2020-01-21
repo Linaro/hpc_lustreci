@@ -43,6 +43,7 @@ git
 vim
 wget
 lvm2
+createrepo
 
 %end
 
@@ -76,6 +77,16 @@ echo "My IP address: \4" > /etc/issue
 ### set permissions
 chmod 0600 /root/.ssh/authorized_keys
 
+### LUSTRE : Configure kdump
+cat << EOF > /etc/kdump.conf
+path /var/crash
+core_collector makedumpfile -c
+default reboot
+EOF
+
+systemctl enable kdump
+systemctl start kdump
+
 ### LUSTRE : Install cluster private key
 {% for name, key in users.items() %}{% if "lustreclusterprivate" in name|string %}
 printf "{{key}}\n" >> /root/.ssh/lustrecluster ;
@@ -96,6 +107,7 @@ rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/perf-4.18.0-8
 rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/python3-perf-4.18.0-80.11.2.el8.aarch64.rpm
 rpm -ivh --oldpackage http://10.40.0.13/lustre_deps/linux/Packages/bpftool-4.18.0-80.11.2.el8.aarch64.rpm
 # And exclude kernel from upgrades
+yum install -y  kernel-rpm-macros kernel-abi-whitelist
 echo "exclude=kernel*" >> /etc/yum.conf
 
 ### LUSTRE : Install dependencies for build
@@ -146,6 +158,5 @@ systemctl stop firewalld
 ### LUSTRE : Fetch kernel sources for build
 wget -P /home/builder/ http://10.40.0.13/lustre_deps/linux/kernel-latest_SOURCES.tar.gz
 cd /home/builder && tar xf kernel-latest_SOURCES.tar.gz
-
 
 %end
