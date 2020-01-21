@@ -1,0 +1,47 @@
+FSNAME=lustrarm
+FSTYPE=zfs
+NETTYPE=tcp
+DEBUG_SIZE=1024
+MOUNT=/lustre
+MOUNT2=/mnt/lustre
+DIR2=/mnt/lustre
+DIR=/lustre
+RUNAS_ID=500
+RUNAS_GID=500
+RUNAS='sudo -u runas'
+# MDS and MDT configuration
+MDSCOUNT=1
+
+mds_HOST="MDSMGSMACHINE"
+mds_host="MDSMGSMACHINE"
+mgs_HOST="MDSMGSMACHINE"
+mgs_host="MDSMGSMACHINE"
+MGSNID="MDSMGSMACHINE"
+mdt_HOST="MDSMGSMACHINE"
+mdt_host="MDSMGSMACHINE"
+MDSDEV1="/dev/DEVMDSMGS"
+MGSDEV="/dev/DEVMDSMGS"
+MGSDEV1="/dev/DEVMDSMGS"
+
+# OSS and OST configuration
+OSTCOUNT=1
+
+ost_HOST="OSTMACHINE"
+OSTDEV1="/dev/DEVOST"
+OSTDEV="/dev/DEVOST"
+OST1DEV="/dev/DEVOST"
+OSSDEV="/dev/DEVOST"
+OSSDEV1="/dev/DEVOST"
+
+# Client configuration
+CLIENTCOUNT=1
+CLIENTS="CLIENTMACHINE"
+RCLIENTS="CLIENTMACHINE"
+
+PDSH="/usr/bin/pdsh -l root -S -Rssh -w"
+
+MODOPTS_LIBCFS="libcfs_panic_on_lbug=0"
+FAIL_ON_ERROR=${FAIL_ON_ERROR:-true}
+PTLDEBUG=-1
+SUBSYSTEM="all"
+DAEMONFILE="/tmp/lustre-debug.log"

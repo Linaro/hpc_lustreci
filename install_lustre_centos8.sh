@@ -10,6 +10,8 @@ LUSTRE_REPO_URL="http://10.40.0.13/lustre/latest/lustre"
 LUSTRE_VERSION="2.13.51_dirty-1"
 LUSTRE_DISK="/dev/sdb"
 
+BACKEND_TYPE="ldiskfs"
+
 mkdir -p $DIR_BROKEN_KMODS
 
 sudo yum install -y epel-release
@@ -23,7 +25,7 @@ wget -P "$DIR_BROKEN_KMODS" "$LUSTRE_REPO_URL/kmod-lustre-tests-$LUSTRE_VERSION.
 
 sudo rpm -ivh --nodeps "$DIR_BROKEN_KMODS/kmod-lustre-$LUSTRE_VERSION.el8.aarch64.rpm" "$DIR_BROKEN_KMODS/kmod-lustre-osd-ldiskfs-$LUSTRE_VERSION.el8.aarch64.rpm" "$DIR_BROKEN_KMODS/kmod-lustre-osd-zfs-$LUSTRE_VERSION.el8.aarch64.rpm" "$DIR_BROKEN_KMODS/kmod-lustre-tests-$LUSTRE_VERSION.el8.aarch64.rpm"
 
-sudo yum install -y lustre-tests
+sudo yum install -y lustre-tests lustre-osd-zfs-mount
 
 # Assuming LUSTRE_DISK is untouched (fresh LustreVM)
 printf "o\nn\np\n1\n\n\nw\n" | sudo fdisk "$LUSTRE_DISK"
@@ -44,7 +46,7 @@ EOF
 
 cat cluster_hosts | sudo tee -a /etc/hosts
 
-cp templates/test_lustre_config.sh lustretestcentos8.sh 
+cp templates/test_lustre_config_${BACKEND_TYPE}.sh lustretestcentos8.sh 
 
 sed -i "s/MDSMGSMACHINE/$MDSMGSMACHINE/g" lustretestcentos8.sh
 sed -i "s/OSTMACHINE/$OSTMACHINE/g" lustretestcentos8.sh
