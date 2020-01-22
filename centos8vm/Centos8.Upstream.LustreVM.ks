@@ -89,7 +89,7 @@ systemctl start kdump
 
 ### LUSTRE : Install cluster private key
 {% for name, key in users.items() %}{% if "lustreclusterprivate" in name|string %}
-printf "{{key}}\n" >> /root/.ssh/lustrecluster ;
+echo "{{key}}" >> /root/.ssh/lustrecluster ;
 {% endif %}{% endfor %}
 chmod 0600 /root/.ssh/lustrecluster
 
