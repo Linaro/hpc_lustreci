@@ -7,7 +7,7 @@
 DIR_HOME="/home/$(whoami)/"
 DIR_BROKEN_KMODS="$DIR_HOME/broken_kmods"
 LUSTRE_REPO_URL="http://10.40.0.13/lustre/latest/lustre"
-LUSTRE_VERSION="2.13.51_dirty-1"
+LUSTRE_VERSION="2.13.51_13_gc059b73_dirty-1"
 LUSTRE_DISK="/dev/sdb"
 
 BACKEND_TYPE="ldiskfs"
@@ -54,4 +54,4 @@ sed -i "s/CLIENTMACHINE/$CLIENTMACHINE/g" lustretestcentos8.sh
 sed -i "s/DEVMDSMGS/$DEVMDSMGS/g" lustretestcentos8.sh
 sed -i "s/DEVOST/$DEVOST/g" lustretestcentos8.sh
 
-cp lustretestcentos8.sh /lib64/lustre/tests/cfg/
+sudo cp lustretestcentos8.sh /lib64/lustre/tests/cfg/
