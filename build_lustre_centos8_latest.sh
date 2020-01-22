@@ -14,6 +14,9 @@ alias l_make="$MAKE_ENV make -C"
 
 ### CREATEREPO FOR RPMS
 DIR_REPO="$ROOT/repo_lustre"
+DIR_REPO_LUSTRE="$DIR_REPO/lustre-$(date -I)"
+DIR_REPO_ZFS="$DIR_REPO/zfs-$ZFS_VERSION"
+DIR_REPO_E2FSPROGS="$DIR_REPO/e2fsprogs-$(date -I)"
 REPO_FILE=/etc/yum.repos.d/lustre_build.repo
 
 #### ZFS SPL BUILD ENV
@@ -44,7 +47,9 @@ LUSTRE_BRANCH="lustre-arm"
 DIR_KERNEL="/home/$USER/rpmbuild/BUILD/kernel-4.18.0-80.11.2.el8_0/linux-4.18.0-80.11.2.el8.aarch64/"
 
 mkdir -p $DIR_HOME
-mkdir -p $DIR_REPO
+mkdir -p $DIR_REPO_LUSTRE
+mkdir -p $DIR_REPO_ZFS
+mkdir -p $DIR_REPO_E2FSPROGS
 mkdir -p $DIR_ZFS_SRC
 mkdir -p $DIR_SPL_SRC
 mkdir -p $DIR_E2PROGS_SRC
@@ -144,7 +149,7 @@ else
 		&& l_make $DIR_ZFS_SRC -j1 pkg-utils \
 		&& l_make $DIR_ZFS_SRC -j1 pkg-kmod rpms
 
-	mv $DIR_ZFS_SRC/*.rpm $DIR_REPO/
+	mv $DIR_ZFS_SRC/*.rpm $DIR_REPO_ZFS/
 	sudo createrepo $DIR_REPO
 	sudo yum clean all
 	sudo yum update -y || true
@@ -174,7 +179,7 @@ else
 	#	&& dpkg-buildpackage -b -us -uc 
 
 	# Install e2fsprogs packages
-	mv $DIR_RPMBUILD/*.rpm $DIR_REPO/
+	mv $DIR_RPMBUILD/*.rpm $DIR_REPO_E2FSPROGS/
 	sudo createrepo $DIR_REPO
 	sudo yum clean all
 	sudo yum update -y || true
@@ -212,7 +217,7 @@ sh "$DIR_LUSTRE_SRC/autogen.sh" \
 
 echo "###########LUSTRE BUILT#################"
 
-mv $DIR_LUSTRE_SRC/*.rpm $DIR_REPO/
+mv $DIR_LUSTRE_SRC/*.rpm $DIR_REPO_LUSTRE/
 sudo createrepo $DIR_REPO
 sudo yum clean all
 sudo yum update -y || true
