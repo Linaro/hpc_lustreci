@@ -48,9 +48,7 @@ $MDSMGSMACHINE3IP	$MDSMGSMACHINE3
 $OSTMACHINE1IP	$OSTMACHINE1
 $OSTMACHINE2IP	$OSTMACHINE2
 $OSTMACHINE3IP	$OSTMACHINE3
-$CLIENTMACHINE1IP	$CLIENTMACHINE1
-$CLIENTMACHINE2IP	$CLIENTMACHINE2
-$CLIENTMACHINE3IP	$CLIENTMACHINE3
+$CLIENTMACHINEIP	$CLIENTMACHINE
 EOF
 
 	cat cluster_hosts | sudo tee -a /etc/hosts
@@ -63,9 +61,7 @@ EOF
 	sed -i "s/OSTMACHINE1/$OSTMACHINE1/g" lustretestcentos8.sh
 	sed -i "s/OSTMACHINE2/$OSTMACHINE2/g" lustretestcentos8.sh
 	sed -i "s/OSTMACHINE3/$OSTMACHINE3/g" lustretestcentos8.sh
-	sed -i "s/CLIENTMACHINE1/$CLIENTMACHINE1/g" lustretestcentos8.sh
-	sed -i "s/CLIENTMACHINE2/$CLIENTMACHINE2/g" lustretestcentos8.sh
-	sed -i "s/CLIENTMACHINE3/$CLIENTMACHINE3/g" lustretestcentos8.sh
+	sed -i "s/CLIENTMACHINE/$CLIENTMACHINE/g" lustretestcentos8.sh
 	sed -i "s/DEVMDSMGS/$DEVMDSMGS/g" lustretestcentos8.sh
 	sed -i "s/DEVOST/$DEVOST/g" lustretestcentos8.sh
 
