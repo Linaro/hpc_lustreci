@@ -1,0 +1,27 @@
+# This file is used to specify the Lustre Cluster environment
+# That is : what is the hostname of each node, as well as its IP.
+# It is used to substitute template the config file for the lustre test suite
+# As well as the current node's hosts file
+#
+# Format is as follows (copy paste, comment out since it will be source'd) :
+# NOTE : DEVs, for escaping purposes, in the config are in the form of OSTDEV=/dev/$DEVOST
+#export MDSMGSMACHINE1IP="IP_OF_MDSMGS_HERE"
+#export MDSMGSMACHINE1="HOSTNAME_OF_MDSMGS_HERE"
+#export MDSMGSMACHINE2IP="IP_OF_MDSMGS_HERE"
+#export MDSMGSMACHINE2="HOSTNAME_OF_MDSMGS_HERE"
+#export MDSMGSMACHINE3IP="IP_OF_MDSMGS_HERE"
+#export MDSMGSMACHINE3="HOSTNAME_OF_MDSMGS_HERE"
+#export OSTMACHINE1IP="IP_OF_THE_OST_HERE"
+#export OSTMACHINE1="HOSTNAME_OF_THE_OST_HERE"
+#export OSTMACHINE2IP="IP_OF_THE_OST_HERE"
+#export OSTMACHINE2="HOSTNAME_OF_THE_OST_HERE"
+#export OSTMACHINE3IP="IP_OF_THE_OST_HERE"
+#export OSTMACHINE3="HOSTNAME_OF_THE_OST_HERE"
+#export CLIENTMACHINE1IP="IP_OF_CLIENT_HERE"
+#export CLIENTMACHINE1="HOSTNAME_OF_CLIENT_HERE"
+#export CLIENTMACHINE2IP="IP_OF_CLIENT_HERE"
+#export CLIENTMACHINE2="HOSTNAME_OF_CLIENT_HERE"
+#export CLIENTMACHINE3IP="IP_OF_CLIENT_HERE"
+#export CLIENTMACHINE3="HOSTNAME_OF_CLIENT_HERE"
+#export DEVOST="partition_dedicated_to_OST"
+#export DEVMDSMGS="partition_dedicated_to_MDSMGS"
