@@ -7,7 +7,7 @@
 DIR_HOME="/home/$(whoami)/"
 DIR_BROKEN_KMODS="$DIR_HOME/broken_kmods"
 LUSTRE_REPO_URL="http://10.40.0.13/lustre/latest/lustre"
-LUSTRE_VERSION="2.13.51_13_gc059b73_dirty-1"
+LUSTRE_VERSION="2.13.51_71_gfa70e91_dirty-1"
 LUSTRE_DISK="/dev/sdb"
 
 BACKEND_TYPE="ldiskfs"
