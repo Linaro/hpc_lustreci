@@ -27,7 +27,7 @@ wget -P "$DIR_BROKEN_KMODS" "$LUSTRE_REPO_URL/kmod-lustre-tests-$LUSTRE_VERSION.
 
 sudo rpm -ivh --nodeps "$DIR_BROKEN_KMODS/kmod-lustre-$LUSTRE_VERSION.el8.aarch64.rpm" "$DIR_BROKEN_KMODS/kmod-lustre-osd-ldiskfs-$LUSTRE_VERSION.el8.aarch64.rpm" "$DIR_BROKEN_KMODS/kmod-lustre-osd-zfs-$LUSTRE_VERSION.el8.aarch64.rpm" "$DIR_BROKEN_KMODS/kmod-lustre-tests-$LUSTRE_VERSION.el8.aarch64.rpm"
 
-sudo yum install -y lustre-tests lustre-osd-zfs-mount
+sudo yum install -y lustre-tests lustre-osd-zfs-mount lustre-osd-ldiskfs-mount
 
 # Assuming LUSTRE_DISK is untouched (fresh LustreVM)
 printf "o\nn\np\n1\n\n\nw\n" | sudo fdisk "$LUSTRE_DISK"
