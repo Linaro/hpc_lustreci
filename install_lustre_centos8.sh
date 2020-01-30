@@ -57,6 +57,7 @@ EOF
 
 	sed -i "s/MDSMGSMACHINE1/$MDSMGSMACHINE1/g" lustretestcentos8.sh
 	sed -i "s/MDSMGSMACHINE2/$MDSMGSMACHINE2/g" lustretestcentos8.sh
+	sed -i "s/MDSMGSMACHINE3/$MDSMGSMACHINE3/g" lustretestcentos8.sh
 	sed -i "s/OSTMACHINE1/$OSTMACHINE1/g" lustretestcentos8.sh
 	sed -i "s/OSTMACHINE2/$OSTMACHINE2/g" lustretestcentos8.sh
 	sed -i "s/OSTMACHINE3/$OSTMACHINE3/g" lustretestcentos8.sh
