@@ -136,6 +136,8 @@ EOF
 
 ### LUSTRE : Add e2fsprogs and lustre repo
 ### NOTE: You still need to manually wget and rpm -ivh --nodeps the kmods...
+### NOTE2 : You do need lustre/, e2fsprogs/ and repodata/ at that URL
+### UPDATE : Latest version seems to work aside from osd-ldiskfs which seems to have a spurious dependency on ldiskfsprogs
 
 cat << EOF > /etc/yum.repos.d/lustre.repo
 [lustre_repo]
